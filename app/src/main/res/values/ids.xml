@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="reigster_screen" type="id" />
+    <item name="email_login" type="id" />
+    <item name="password_login" type="id" />
+    <item name="login_button" type="id" />
+</resources>
