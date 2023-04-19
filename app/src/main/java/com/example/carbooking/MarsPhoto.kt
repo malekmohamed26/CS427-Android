@@ -1,4 +1,4 @@
-package com.example.carbooking.model
+package com.example.carbooking
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

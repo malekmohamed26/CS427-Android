@@ -1,40 +1,55 @@
 package com.example.carbooking
 
+import android.media.Image
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import java.sql.Time
-import java.util.Random
+import android.widget.TextView
+import android.widget.Toast
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
+import java.io.IOException
+import java.net.URL
+
 
 
 class MainActivity : AppCompatActivity() {
+
+    lateinit var textView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         supportActionBar?.hide()
 
-        val recyclerView: RecyclerView = findViewById(R.id.recycler_view)
+        lifecycleScope.launch {
+            val listResult = MarsApi.retrofitService.getPhotos()
+            lifecycleScope.launchWhenCreated {
+                try {
+                    val listResult = MarsApi.retrofitService.getPhotos()
+                    textView = findViewById(R.id.textView)
+                    textView.setText("Success. ${listResult.size} Mars photos retrieved")
+                } catch (e: IOException) {
 
-        recyclerView.layoutManager = LinearLayoutManager(this)
+                }
+            }
 
-        val data = ArrayList<Rides>()
-//        val randomNumber: Random = Random()
-//        val arrivalTime:Time = Time(15)
-//
-//        for (i in 1..10) {
-//                data.add(Rides(randomNumber, 10, arrivalTime))
-////            //data.add(Rides())
-//        }
-        val id : Int
-        val img_src : String
+        }
+    }
 
+    private fun getMarsPhotos() {
+        lifecycleScope.launch {
+            try {
+                val listResult = MarsApi.retrofitService.getPhotos()
+                textView = findViewById(R.id.textView)
+                textView.setText("Success. ${listResult.size} Mars photos retrieved")
+            } catch (e: IOException) {
 
-        // This will pass the ArrayList to our Adapter
-        val adapter = RidesAdapter(data)
-
-        // Setting the Adapter with the recyclerview
-        recyclerView.adapter = adapter
+            }
+        }
     }
 }
