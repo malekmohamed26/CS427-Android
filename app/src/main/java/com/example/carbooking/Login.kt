@@ -76,12 +76,16 @@ class Login : AppCompatActivity() {
         // Initialize Firebase Auth
         auth = Firebase.auth
 
+        val sharedPrefs = getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
+        val isSignedIn = sharedPrefs.getBoolean("isSignedIn", false)
+
         val login_button: Button = findViewById(R.id.login_button)
         val google_login_button: Button = findViewById(R.id.google_sign_in)
         val register_button: TextView = findViewById(R.id.register_button)
         val email_login: EditText = findViewById(R.id.email_login)
         val password_login: EditText = findViewById(R.id.password_login)
         val invalid_password: TextView = findViewById(R.id.invalid_password)
+        val forgot_password_textView: TextView = findViewById(R.id.forgot_password_textView)
 
 
         notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -93,6 +97,17 @@ class Login : AppCompatActivity() {
         // the notification is clicked, this intent will come into action
         val pendingIntent = PendingIntent.getActivity(this, 0, intent,
             PendingIntent.FLAG_IMMUTABLE)
+
+        if (isSignedIn) {
+            // User is signed in, take them to the main activity
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+        forgot_password_textView.setOnClickListener {
+            startActivity(Intent(this, ForgotPassword::class.java))
+        }
 
 
         register_button.setOnClickListener {
@@ -110,6 +125,9 @@ class Login : AppCompatActivity() {
                 if (task.isSuccessful) {
                     val idToken: String? = task.result?.token
                     val credential = GoogleAuthProvider.getCredential(idToken, null)
+                    val editor = sharedPrefs.edit()
+                    editor.putBoolean("isSignedIn", true)
+                    editor.apply()
                     startActivity(Intent(this, MainActivity::class.java))
                     displayNotification(pendingIntent)
                     val user = auth.currentUser
@@ -126,6 +144,10 @@ class Login : AppCompatActivity() {
             auth.signInWithEmailAndPassword(email_login.text.toString(), password_login.text.toString())
                 .addOnCompleteListener (this) {
                     if(it.isSuccessful){
+                        val editor = sharedPrefs.edit()
+                        editor.putBoolean("isSignedIn", true)
+                        editor.apply()
+
                         startActivity(Intent(this, MainActivity::class.java))
                         displayNotification(pendingIntent)
                     } else{
@@ -211,5 +233,15 @@ class Login : AppCompatActivity() {
 
     private fun updateUI(user: FirebaseUser?) {
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        // Clear the "stay signed in" flag when the activity is destroyed
+        val sharedPrefs = getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
+        val editor = sharedPrefs.edit()
+        editor.putBoolean("isSignedIn", false)
+        editor.apply()
     }
 }
