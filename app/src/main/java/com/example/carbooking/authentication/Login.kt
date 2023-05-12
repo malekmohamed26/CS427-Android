@@ -1,4 +1,4 @@
-package com.example.carbooking
+package com.example.carbooking.authentication
 
 import android.app.Notification
 import android.app.NotificationChannel
@@ -13,14 +13,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.*
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
-import com.google.android.gms.auth.api.Auth
+import com.example.carbooking.main.MainActivity
+import com.example.carbooking.R
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
-import com.google.android.gms.common.api.GoogleApiClient
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
@@ -99,7 +97,6 @@ class Login : AppCompatActivity() {
             PendingIntent.FLAG_IMMUTABLE)
 
         if (isSignedIn) {
-            // User is signed in, take them to the main activity
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
@@ -217,7 +214,9 @@ class Login : AppCompatActivity() {
             builder = Notification.Builder(this, CHANNEL_ID)
                 .setContentText("Signed in successfully")
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
-                .setLargeIcon(BitmapFactory.decodeResource(this.resources, R.drawable.ic_launcher_foreground))
+                .setLargeIcon(BitmapFactory.decodeResource(this.resources,
+                    R.drawable.ic_launcher_foreground
+                ))
                 .setContentIntent(pendingIntent)
                 Toast.makeText(this, "Signed in successfully", Toast.LENGTH_LONG).show()
         } else {
@@ -225,7 +224,9 @@ class Login : AppCompatActivity() {
             builder = Notification.Builder(this)
                 .setContentText("contentView")
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
-                .setLargeIcon(BitmapFactory.decodeResource(this.resources, R.drawable.ic_launcher_background))
+                .setLargeIcon(BitmapFactory.decodeResource(this.resources,
+                    R.drawable.ic_launcher_background
+                ))
                 .setContentIntent(pendingIntent)
         }
         notificationManager.notify(1234, builder.build())

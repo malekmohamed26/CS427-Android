@@ -1,4 +1,4 @@
-package com.example.carbooking
+package com.example.carbooking.authentication
 
 import android.graphics.Color
 import android.os.Build
@@ -6,8 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
+import com.example.carbooking.R
 import com.google.firebase.auth.FirebaseAuth
 
 class ForgotPassword : AppCompatActivity() {
