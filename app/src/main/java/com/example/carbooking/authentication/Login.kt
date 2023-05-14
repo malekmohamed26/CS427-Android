@@ -15,6 +15,7 @@ import android.util.Log
 import android.widget.*
 import com.example.carbooking.main.MainActivity
 import com.example.carbooking.R
+import com.example.carbooking.RecyclerViewHome
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -125,7 +126,7 @@ class Login : AppCompatActivity() {
                     val editor = sharedPrefs.edit()
                     editor.putBoolean("isSignedIn", true)
                     editor.apply()
-                    startActivity(Intent(this, MainActivity::class.java))
+                    startActivity(Intent(this, RecyclerViewHome::class.java))
                     displayNotification(pendingIntent)
                     val user = auth.currentUser
                     //updateUI(user)

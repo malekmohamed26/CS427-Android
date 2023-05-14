@@ -1,4 +1,4 @@
-package com.example.carbooking.main
+package com.example.carbooking
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,7 +8,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.carbooking.R
 import com.example.carbooking.network.MarsPhoto
 
 class ResponsePhotoAdapter(val context: Context, val userList: List<MarsPhoto>):
@@ -29,7 +28,7 @@ class ResponsePhotoAdapter(val context: Context, val userList: List<MarsPhoto>):
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.image_id.text = userList[position].id
-        Glide.with(context).load(userList[position].imgSrc).into(holder.image)
+        Glide.with(context).load(userList[position].imgSrcUrl).into(holder.image)
     }
 
     override fun getItemCount(): Int {

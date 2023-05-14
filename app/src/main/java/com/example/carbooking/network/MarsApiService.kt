@@ -2,9 +2,12 @@ package com.example.carbooking
 
 import com.example.carbooking.network.MarsPhoto
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import com.squareup.moshi.KotlinJsonAdapterFactory
+import com.squareup.moshi.Moshi
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType
 import retrofit2.Retrofit
+import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 
 private const val BASE_URL =
@@ -13,8 +16,12 @@ private const val BASE_URL =
 /**
  * Use the Retrofit builder to build a retrofit object using a kotlinx.serialization converter
  */
+private val moshi = Moshi.Builder()
+    .add(KotlinJsonAdapterFactory())
+    .build()
+
 private val retrofit = Retrofit.Builder()
-    .addConverterFactory(Json.asConverterFactory(MediaType.get("application/json")))
+    .addConverterFactory(MoshiConverterFactory.create(moshi))
     .baseUrl(BASE_URL)
     .build()
 
@@ -22,7 +29,7 @@ private val retrofit = Retrofit.Builder()
  * Retrofit service object for creating api calls
  */
 interface MarsApiService {
-    @GET("/photos")
+    @GET("photos")
     suspend fun getPhotos(): List<MarsPhoto>
 }
 

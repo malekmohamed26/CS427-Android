@@ -23,9 +23,6 @@
             android:name=".RecyclerViewHome"
             android:exported="false" />
         <activity
-            android:name=".RecyclerViewActivity"
-            android:exported="false" />
-        <activity
             android:name=".SplashScreen"
             android:exported="true"
             android:theme="@style/SplashScreenTheme">
