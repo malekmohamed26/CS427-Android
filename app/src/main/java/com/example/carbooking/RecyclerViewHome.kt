@@ -22,6 +22,7 @@ class RecyclerViewHome : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recycler_view_home)
+        supportActionBar?.hide()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             window.statusBarColor = Color.WHITE
         }
