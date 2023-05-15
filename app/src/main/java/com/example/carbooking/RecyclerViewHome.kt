@@ -47,7 +47,7 @@ class RecyclerViewHome : AppCompatActivity() {
                     MarsApi.retrofitService.getPhotos())
                 progress_bar.visibility = View.INVISIBLE
             } catch (e: IOException) {
-                Toast.makeText(applicationContext, "Something went wrong!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "Something went wrong! Try again", Toast.LENGTH_SHORT).show()
             }
         }
     }
