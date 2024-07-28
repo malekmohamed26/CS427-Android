@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "474792421445",
+    "project_id": "carbooking-37f67",
+    "storage_bucket": "carbooking-37f67.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:474792421445:android:cc3bb48097473512765b2c",
+        "android_client_info": {
+          "package_name": "com.example.carbooking"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "474792421445-p85otlogffkt1a2uo467cqgdbjmqlelm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.carbooking",
+            "certificate_hash": "15356c70180acb06ebd74b06ee3812ddcf10a7e6"
+          }
+        },
+        {
+          "client_id": "474792421445-ggnaees1f1lps82slatdmvm65f19u0gs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYAzxXNZqoBKJ5dhTFzmqcwgFeKRLuaak"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "474792421445-ggnaees1f1lps82slatdmvm65f19u0gs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
